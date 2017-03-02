@@ -1,13 +1,43 @@
 package validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validator {
 
 	public static boolean validate(String email) {
 		// TODO Auto-generated method stub
-		if(email.contains("@")&&email.contains(".")){
+		if(validStart(email)==true){
+			if(order(email)==true){
+				return true;
+			}
+			else{ 
+				return false;
+			}
+		}
+		else{ 
+			return false;
+		}
+	}
+	public static boolean order(String email){
+		// TODO Auto-generated method stub
+		Pattern order = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		Matcher matches = order.matcher(email);
+		if(matches.find()){
 			return true;
 		}
-		else return false;
+		else 
+			return false;
+	
+		}
+	public static boolean validStart(String email) {
+		// TODO Auto-generated method stub
+		if(!(email.length()<=1||email.charAt(0)=='-')){
+			return true;
+		} 
+		else 
+			{
+				return false;
+			}
 	}
-
 }
